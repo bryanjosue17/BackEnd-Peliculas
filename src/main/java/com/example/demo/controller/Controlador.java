@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Model;
 import com.example.demo.repository.Repository;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 
@@ -65,8 +65,8 @@ public class Controlador {
 	@PostMapping("/peliculas")
 	public ResponseEntity<Model> createPelicula(@RequestBody Model pelicula) {
 		try {
-			Model _pelicula = repo.save(new Model(pelicula.getNombre(), pelicula.getAutor(), pelicula.getGenero(),
-					pelicula.getAnio(), pelicula.getDatetime()));
+			Model _pelicula = repo.save(new Model(pelicula.getNombre(),pelicula.getGenero(),pelicula.getAnio(), pelicula.getAutor(), 
+					 pelicula.getDatetime()));
 			return new ResponseEntity<>(_pelicula, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
